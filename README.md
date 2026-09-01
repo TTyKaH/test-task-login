@@ -54,7 +54,7 @@ npm run dev
 ### 1. Регистрация
 
 ```bash
-curl -X POST http://localhost:3000/auth/register \
+curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"password123"}'
 ```
@@ -62,7 +62,7 @@ curl -X POST http://localhost:3000/auth/register \
 ### 2. Логин
 
 ```bash
-curl -X POST http://localhost:3000/auth/login \
+curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"password123"}'
 ```
@@ -70,7 +70,7 @@ curl -X POST http://localhost:3000/auth/login \
 ### 3. Обновление токена
 
 ```bash
-curl -X POST http://localhost:3000/auth/refresh \
+curl -X POST http://localhost:3000/api/auth/refresh \
   -H "Content-Type: application/json" \
   -d '{"refreshToken":"refresh_токен_from_login"}'
 ```
