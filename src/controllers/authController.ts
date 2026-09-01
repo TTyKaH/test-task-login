@@ -4,6 +4,50 @@ import jwt from "jsonwebtoken";
 import validator from "validator";
 import DBPool from "@/config/db.js";
 import redisClient from "@/config/redis.js";
+import { isEmailBlocked } from "@/services/emailBlacklistService.js";
+
+export const register = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ error: "Password must be at least 6 characters long" });
+    }
+
+    if (isEmailBlocked(email)) {
+      return res.status(400).json({ error: "Email domain is not allowed" });
+    }
+
+    const [existing] = await DBPool.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email],
+    );
+    if ((existing as any[]).length > 0) {
+      return res.status(409).json({ error: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await DBPool.query(
+      "INSERT INTO users (email, password_hash) VALUES (?, ?)",
+      [email, hashedPassword],
+    );
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("Register error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 const login = async (req: Request, res: Response) => {
   try {
