@@ -1,0 +1,122 @@
+{
+  "info": {
+    "_postman_id": "df5baba4-b71a-45ee-a622-acc88844ba02",
+    "name": "Login API Test",
+    "description": "StartFragment_Коллекция запросов для тестирования Login API. Сервер развернут на VPS_EndFragment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22931717"
+  },
+  "item": [
+    {
+      "name": "user create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"user11@example.com\", \"password\": \"password123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://195.19.202.104/api/auth/register",
+          "protocol": "https",
+          "host": [
+            "195",
+            "19",
+            "202",
+            "104"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "user login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"test@example.com\", \"password\": \"password123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://195.19.202.104/api/auth/login",
+          "protocol": "https",
+          "host": [
+            "195",
+            "19",
+            "202",
+            "104"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "refresh token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"refreshToken\": \"ВСТАВИТЬ_REFRESH_ТОКЕН\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://195.19.202.104/api/auth/refresh",
+          "protocol": "https",
+          "host": [
+            "195",
+            "19",
+            "202",
+            "104"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "refresh"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
